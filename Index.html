@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>氣泡排序示範</title>
+<style>
+    body{
+        font-family: Arial;
+        text-align: center;
+        margin-top: 50px;
+    }
+    input{
+        width: 300px;
+        padding: 8px;
+    }
+    button{
+        padding: 8px 15px;
+        margin-left: 10px;
+        cursor: pointer;
+    }
+    .result{
+        margin-top: 20px;
+        font-size: 18px;
+    }
+</style>
+</head>
+
+<body>
+
+<h2>氣泡排序 (Bubble Sort)</h2>
+
+<p>請輸入數字（用逗號分隔）：</p>
+<input type="text" id="numbers" placeholder="例如: 5,3,8,4,2">
+<button onclick="bubbleSort()">排序</button>
+
+<div class="result">
+<p id="before"></p>
+<p id="after"></p>
+</div>
+
+<script>
+function bubbleSort() {
+
+    let input = document.getElementById("numbers").value;
+    let arr = input.split(",").map(Number);
+
+    document.getElementById("before").innerText = "排序前: " + arr.join(", ");
+
+    // 氣泡排序
+    for (let i = 0; i < arr.length - 1; i++) {
+        for (let j = 0; j < arr.length - 1 - i; j++) {
+
+            if (arr[j] > arr[j + 1]) {
+                // 交換
+                let temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+
+        }
+    }
+
+    document.getElementById("after").innerText = "排序後: " + arr.join(", ");
+}
+</script>
+
+</body>
+</html>
