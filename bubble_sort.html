@@ -14,7 +14,7 @@
         body {
             font-family: 'Microsoft JhengHei', 微軟正黑體, sans-serif;
             line-height: 1.6;
-            background: linear-gradient(135deg, #99bdff 0%, #ce9cff 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: #333;
             padding: 20px;
         }
@@ -26,22 +26,6 @@
             border-radius: 10px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             padding: 40px;
-        }
-
-        /* 回首頁按鈕 */
-        .home-btn{
-            display:inline-block;
-            margin-bottom:20px;
-            padding:10px 20px;
-            background:#667eea;
-            color:white;
-            text-decoration:none;
-            border-radius:6px;
-            font-size:14px;
-        }
-
-        .home-btn:hover{
-            background:#5563c1;
         }
         
         h1 {
@@ -171,27 +155,164 @@
         }
     </style>
 </head>
-
 <body>
+    <div class="container">
+        
+        <a href="index.html" class="home-btn">← 回首頁</a>
 
-<div class="container">
+        <h1>🔄 氣泡排序法</h1>
+        <p class="subtitle">Bubble Sort - 一種簡單但經典的排序演算法</p>
+        
+        <h2>📌 什麼是氣泡排序法？</h2>
+        <p>氣泡排序法（Bubble Sort）是一種簡單的排序演算法，它通過重複走訪要排序的數列，比較相鄰的元素，若順序不正確則交換，直到整個數列排序完成。其名稱來自於較小的元素會慢慢「浮」到數列的頂部，就像氣泡浮到水面一樣。</p>
+        
+        <h2>🎯 演算法原理</h2>
+        <p>氣泡排序的工作原理如下：</p>
+        <ol>
+            <li><strong>比較相鄰元素：</strong>從數列的第一個元素開始，逐一比較相鄰的兩個元素</li>
+            <li><strong>交換順序：</strong>如果前一個元素大於後一個元素，則交換它們</li>
+            <li><strong>重複過程：</strong>繼續向後比較，每次完整遍歷後，最大的元素會移動到最後位置</li>
+            <li><strong>多次遍歷：</strong>重複進行2-3步，直到整個數列排序完成</li>
+        </ol>
+        
+        <h2>💻 代碼示例</h2>
+        <p><strong>C 實現：</strong></p>
+        <div class="code-block">#include &lt;stdio.h&gt;
 
-<a href="index.html" class="home-btn">← 回首頁</a>
+void bubble_sort(int arr[], int n) {
+    for (int i = 0; i &lt; n; i++) {
+        for (int j = 0; j &lt; n - i - 1; j++) {
+            if (arr[j] &gt; arr[j + 1]) {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
 
-<h1>🔄 氣泡排序法</h1>
-<p class="subtitle">Bubble Sort - 一種簡單但經典的排序演算法</p>
+int main() {
+    int arr[] = {64, 34, 25, 12, 22, 11, 90};
+    int n = 7;
+    bubble_sort(arr, n);
+    
+    printf("排序後的陣列: ");
+    for (int i = 0; i &lt; n; i++)
+        printf("%d ", arr[i]);
+    
+    return 0;
+}</div>
+        
+        <h2>📊 複雜度分析</h2>
+        <table>
+            <tr>
+                <th>指標</th>
+                <th>複雜度</th>
+                <th>說明</th>
+            </tr>
+            <tr>
+                <td>時間複雜度（最差情況）</td>
+                <td>O(n²)</td>
+                <td>數列逆序排列時，需要進行n(n-1)/2次比較</td>
+            </tr>
+            <tr>
+                <td>時間複雜度（最好情況）</td>
+                <td>O(n)</td>
+                <td>數列已排序，只需遍歷一次</td>
+            </tr>
+            <tr>
+                <td>時間複雜度（平均情況）</td>
+                <td>O(n²)</td>
+                <td>隨機排列的數列</td>
+            </tr>
+            <tr>
+                <td>空間複雜度</td>
+                <td>O(1)</td>
+                <td>只需要常數個額外的變數</td>
+            </tr>
+            <tr>
+                <td>穩定性</td>
+                <td>穩定</td>
+                <td>相等元素的相對位置不變</td>
+            </tr>
+        </table>
+        
+        <h2>✅ 優點與缺點</h2>
+        <div class="pros-cons">
+            <div class="pros">
+                <h3>✓ 優點</h3>
+                <ul>
+                    <li>演算法簡單易懂</li>
+                    <li>實現容易，代碼簡潔</li>
+                    <li>不需要額外空間</li>
+                    <li>是穩定排序演算法</li>
+                    <li>適合小規模數據排序</li>
+                </ul>
+            </div>
+            <div class="cons">
+                <h3>✗ 缺點</h3>
+                <ul>
+                    <li>時間複雜度高（O(n²)）</li>
+                    <li>大數據集效能差</li>
+                    <li>效率低於快速排序等演算法</li>
+                    <li>比較和交換次數多</li>
+                    <li>不適合生產環境</li>
+                </ul>
+            </div>
+        </div>
+        
+        <h2>🔍 執行範例過程</h2>
+        <div class="example-section">
+            <p><strong>初始陣列：</strong> [5, 2, 8, 1, 9]</p>
+            <p><strong>第一次遍歷：</strong></p>
+            <ul>
+                <li>比較 5 和 2 → 交換 → [2, 5, 8, 1, 9]</li>
+                <li>比較 5 和 8 → 無須交換 → [2, 5, 8, 1, 9]</li>
+                <li>比較 8 和 1 → 交換 → [2, 5, 1, 8, 9]</li>
+                <li>比較 8 和 9 → 無須交換 → [2, 5, 1, 8, 9]</li>
+            </ul>
+            <p><strong>第二次遍歷：</strong></p>
+            <ul>
+                <li>[2, 5, 1, 8, 9]</li>
+            </ul>
+            <p><strong>持續進行直到排序完成：</strong></p>
+            <ul>
+                <li>[1, 2, 5, 8, 9]</li>
+            </ul>
+        </div>
+        
+        <h2>💡 改進版本</h2>
+        <p><strong>早期終止版本：</strong>如果在某次遍歷中沒有任何交換發生，表示數列已排序，可以提前結束：</p>
+        <div class="code-block">def bubble_sort_optimized(arr):
+    n = len(arr)
+    for i in range(n):
+        swapped = False
+        for j in range(0, n - i - 1):
+            if arr[j] &gt; arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+                swapped = True
+        # 如果沒有進行交換,表示已排序
+        if not swapped:
+            break
+    return arr</div>
+        
+        <h2>🎓 應用場景</h2>
+        <ul>
+            <li><strong>教育目的：</strong>作為學習排序演算法的入門教材</li>
+            <li><strong>小規模數據：</strong>數據量較小時（n ≤ 100）可接受</li>
+            <li><strong>幾乎已排序的數據：</strong>當數據接近已排序狀態時</li>
+            <li><strong>簡單系統：</strong>對性能要求不高的簡單應用</li>
+        </ul>
+        
+        <div class="highlight">
+            <strong>💬 重點總結：</strong>氣泡排序是最簡單但效率最低的排序演算法。雖然在實際應用中很少使用，但它作為學習排序概念的基礎非常重要。當需要實際排序大數據時，應該選擇快速排序、歸併排序或堆排序等更高效的演算法。
+        </div>
+        
+        <div class="footer">
+            <p>© 2026 氣泡排序法教學 | 最後更新: 2026年3月2日</p>
+        </div>
 
-<!-- 以下內容保持原本 -->
-<h2>📌 什麼是氣泡排序法？</h2>
-<p>氣泡排序法（Bubble Sort）是一種簡單的排序演算法，它通過重複走訪要排序的數列，比較相鄰的元素，若順序不正確則交換，直到整個數列排序完成。</p>
 
-<!-- 你的其餘內容照原本即可 -->
-
-<div class="footer">
-<p>© 2026 氣泡排序法教學 | 最後更新: 2026年3月2日</p>
-</div>
-
-</div>
-
+    </div>
 </body>
 </html>
