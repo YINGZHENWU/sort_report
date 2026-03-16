@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>選擇排序法介紹</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft JhengHei', 微軟正黑體, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #99ffbd 0%, #9cceff 100%);
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+        }
+
+        /* 回首頁按鈕 */
+        .home-btn{
+            display:inline-block;
+            margin-bottom:20px;
+            padding:10px 20px;
+            background:#667eea;
+            color:white;
+            text-decoration:none;
+            border-radius:6px;
+            font-size:14px;
+        }
+
+        .home-btn:hover{
+            background:#5563c1;
+        }
+
+        h1 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        h2 {
+            color: #764ba2;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .highlight {
+            background-color: #fff3cd;
+            padding: 20px;
+            border-left: 4px solid #ffc107;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .code-block {
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .pros, .cons {
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .pros {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+        }
+
+        .cons {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+        }
+
+        .pros h3, .cons h3 {
+            margin-bottom: 10px;
+        }
+
+        .pros h3 {
+            color: #155724;
+        }
+
+        .cons h3 {
+            color: #721c24;
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #667eea;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .example-section {
+            background-color: #e8f4f8;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+<a href="index.html" class="home-btn">← 回首頁</a>
+
+<h1>🔹 選擇排序法</h1>
+<p class="subtitle">Selection Sort - 一種直觀的排序演算法</p>
+
+<h2>📌 什麼是選擇排序法？</h2>
+<p>選擇排序法（Selection Sort）是一種簡單直觀的排序演算法。它每次從未排序部分選擇最小（或最大）元素，然後將其放到已排序部分的末端，直到整個數列排序完成。</p>
+
+<h2>🎯 演算法原理</h2>
+<ol>
+    <li>從未排序部分找出最小值</li>
+    <li>將最小值與未排序部分的第一個元素交換</li>
+    <li>將已排序部分的長度增加 1，重複以上步驟直到排序完成</li>
+</ol>
+
+<h2>💻 代碼示例</h2>
+<p><strong>C 實現：</strong></p>
+<div class="code-block">#include &lt;stdio.h&gt;
+
+void selection_sort(int arr[], int n) {
+    for(int i = 0; i &lt; n-1; i++) {
+        int min_idx = i;
+        for(int j = i+1; j &lt; n; j++) {
+            if(arr[j] &lt; arr[min_idx]) {
+                min_idx = j;
+            }
+        }
+        int temp = arr[i];
+        arr[i] = arr[min_idx];
+        arr[min_idx] = temp;
+    }
+}
+
+int main() {
+    int arr[] = {64, 25, 12, 22, 11};
+    int n = 5;
+    selection_sort(arr, n);
+    printf("排序後的陣列: ");
+    for(int i=0; i&lt;n; i++)
+        printf("%d ", arr[i]);
+    return 0;
+}</div>
+
+<h2>📊 複雜度分析</h2>
+<table>
+<tr>
+<th>指標</th>
+<th>複雜度</th>
+<th>說明</th>
+</tr>
+<tr>
+<td>時間複雜度（最差/平均）</td>
+<td>O(n²)</td>
+<td>需要比較 n(n-1)/2 次</td>
+</tr>
+<tr>
+<td>時間複雜度（最好）</td>
+<td>O(n²)</td>
+<td>即使已排序，也需要遍歷 n(n-1)/2 次</td>
+</tr>
+<tr>
+<td>空間複雜度</td>
+<td>O(1)</td>
+<td>只需要常數額外空間</td>
+</tr>
+<tr>
+<td>穩定性</td>
+<td>不穩定</td>
+<td>相等元素的相對位置可能改變</td>
+</tr>
+</table>
+
+<h2>✅ 優點與缺點</h2>
+<div class="pros-cons">
+<div class="pros">
+<h3>✓ 優點</h3>
+<ul>
+<li>概念簡單直觀</li>
+<li>實現容易</li>
+<li>不需要額外空間</li>
+<li>適合小型數據排序</li>
+</ul>
+</div>
+<div class="cons">
+<h3>✗ 缺點</h3>
+<ul>
+<li>時間複雜度高 O(n²)</li>
+<li>效率低於快速排序、歸併排序等</li>
+<li>不穩定</li>
+<li>大數據集不適用</li>
+</ul>
+</div>
+</div>
+
+<h2>🔍 執行範例過程</h2>
+<div class="example-section">
+<p><strong>初始陣列：</strong> [64, 25, 12, 22, 11]</p>
+<p><strong>第一次遍歷：</strong> 找到最小值 11 → 與第一個元素交換 → [11, 25, 12, 22, 64]</p>
+<p><strong>第二次遍歷：</strong> 找到最小值 12 → 與第二個元素交換 → [11, 12, 25, 22, 64]</p>
+<p><strong>第三次遍歷：</strong> 找到最小值 22 → 與第三個元素交換 → [11, 12, 22, 25, 64]</p>
+<p><strong>第四次遍歷：</strong> 找到最小值 25 → 與第四個元素交換 → [11, 12, 22, 25, 64]</p>
+<p><strong>排序完成：</strong> [11, 12, 22, 25, 64]</p>
+</div>
+
+<div class="highlight">
+<strong>💬 重點總結：</strong>選擇排序法簡單易懂，但效率低下且不穩定。適合學習排序概念或小規模數據，對大數據集不建議使用。
+</div>
+
+<div class="footer">
+<p>© 2026 選擇排序法教學 | 最後更新: 2026年3月16日</p>
+</div>
+
+</div>
+</body>
+</html>
