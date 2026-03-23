@@ -3,63 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <title>排序演算法首頁</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             text-align: center;
-            background-color: #f0f0f0;
-            margin-top: 100px;
+            width: 400px;
         }
 
         h1 {
+            margin-bottom: 10px;
             color: #333;
         }
 
-        a {
-            text-decoration: none;
+        p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .section {
+            margin-top: 20px;
         }
 
         .btn {
-            display: inline-block;
-            padding: 15px 30px;
-            background-color: #4CAF50;
+            display: block;
+            padding: 12px;
+            margin: 10px 0;
+            background: linear-gradient(45deg, #4CAF50, #2ecc71);
             color: white;
-            border-radius: 8px;
-            font-size: 20px;
-            margin-top: 30px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 18px;
+            transition: 0.3s;
         }
 
         .btn:hover {
-            background-color: #45a049;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .divider {
+            margin: 25px 0;
+            height: 1px;
+            background: #ddd;
         }
     </style>
 </head>
 <body>
 
+<div class="container">
     <h1>排序演算法</h1>
-    <p>點擊下面按鈕查看排序的介紹</p>
+    <p>點擊按鈕探索不同排序方法</p>
 
-    <a href="bubble_sort.html">
-        <div class="btn">Bubble Sort</div>
-    </a>
+    <div class="section">
+        <p><strong>📘 排序介紹</strong></p>
+        <a href="bubble_sort.html" class="btn">Bubble Sort</a>
+        <a href="selection_sort.html" class="btn">Selection Sort</a>
+    </div>
 
-    <br>
+    <div class="divider"></div>
 
-    <a href="selection_sort.html">
-        <div class="btn">Selection Sort</div>
-    </a>
-
-    <p>點擊下面按鈕查看排序的示範</p>
-
-    <a href="bubble_sort2.html">
-        <div class="btn">Bubble Sort</div>
-    </a>
-
-    <br>
-
-    <a href="selection_sort2.html">
-        <div class="btn">Selection Sort</div>
-    </a>
+    <div class="section">
+        <p><strong>🎬 排序示範</strong></p>
+        <a href="bubble_sort2.html" class="btn">Bubble Sort Demo</a>
+        <a href="selection_sort2.html" class="btn">Selection Sort Demo</a>
+    </div>
+</div>
 
 </body>
 </html>
