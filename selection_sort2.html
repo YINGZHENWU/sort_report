@@ -1,290 +1,154 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
-<title>選擇排序演示(Selection Sort Visualization)</title>
-
+<title>Selection Sort 視覺化進階版</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 <style>
-
-body{
-    font-family: "Segoe UI", sans-serif;
-    text-align:center;
-    background:#f4f6fb;
+body {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    background: linear-gradient(135deg,#141e30,#243b55);
+    color: white;
 }
 
-h2{
-    margin-top:20px;
+h1 { margin-top: 20px; }
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 320px;
+    margin-top: 30px;
 }
 
-button{
-    padding:10px 20px;
-    border:none;
-    border-radius:8px;
-    background:#4a6cf7;
-    color:white;
-    font-size:16px;
-    cursor:pointer;
+.bar {
+    width: 25px;
+    margin: 0 3px;
+    background: #00c6ff;
+    border-radius: 5px;
+    transition: all 0.3s ease;
 }
 
-button:hover{
-    background:#3955d1;
+.controls { margin-top: 20px; }
+
+button, input {
+    padding: 10px 15px;
+    margin: 5px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
 }
 
-#container{
-    display:flex;
-    justify-content:center;
-    align-items:flex-end;
-    height:350px;
-    margin-top:40px;
+button {
+    background: #00c6ff;
+    color: black;
+    cursor: pointer;
+    font-weight: bold;
 }
 
-.bar{
-    width:40px;
-    margin:6px;
-    background:linear-gradient(180deg,#6ea8fe,#3d6df2);
-    border-radius:6px;
-    display:flex;
-    justify-content:center;
-    align-items:flex-start;
-    color:#333;
-    font-weight:bold;
-}
+button:hover { background: #00a2cc; }
 
-.bar span{
-    position:relative;
-    top:-25px;
-}
+input[type=range] { width: 150px; }
 
-.active{
-    background:#ffb347 !important;
-}
+.info { margin-top: 15px; font-size: 16px; }
 
-.min{
-    background:#ff6b6b !important;
-}
-
-.sorted{
-    background:#4cd964 !important;
-}
-
+.finished { background: #00ff9d !important; }
+.active { background: #ff4d4d !important; }
+.min { background: #ffd166 !important; }
 </style>
 </head>
-
 <body>
 
-<h2>Selection Sort 動畫示範</h2>
-<button onclick="startSort()">開始排序</button>
+<h1>⚡ Selection Sort 視覺化進階版</h1>
 
-<div id="container"></div>
+<div class="container" id="container"></div>
 
-<script>
+<div class="controls">
+    <button onclick="generateArray()">🔄 重新產生</button>
+    <button onclick="selectionSort()">▶️ 開始排序</button>
+    <br>
+    速度：<input type="range" min="50" max="1000" value="300" id="speed">
+</div>
 
-let arr = [42,18,33,12,27,55,20];
-let container = document.getElementById("container");
-
-function drawBars(highlight={}, sortedIndex=-1){
-
-    container.innerHTML="";
-
-    arr.forEach((value,index)=>{
-
-        let bar=document.createElement("div");
-        bar.classList.add("bar");
-        bar.style.height=value*4+"px";
-
-        if(index===highlight.current) bar.classList.add("active");
-        if(index===highlight.min) bar.classList.add("min");
-        if(index<sortedIndex) bar.classList.add("sorted");
-
-        let label=document.createElement("span");
-        label.innerText=value;
-
-        bar.appendChild(label);
-        container.appendChild(bar);
-
-    });
-}
-
-function sleep(ms){
-    return new Promise(r=>setTimeout(r,ms));
-}
-
-async function startSort(){
-
-    for(let i=0;i<arr.length-1;i++){
-
-        let minIndex=i;
-
-        for(let j=i+1;j<arr.length;j++){
-
-            drawBars({current:j,min:minIndex},i);
-            await sleep(600);
-
-            if(arr[j]<arr[minIndex]){
-                minIndex=j;
-                drawBars({current:j,min:minIndex},i);
-                await sleep(600);
-            }
-        }
-
-        let temp=arr[i];
-        arr[i]=arr[minIndex];
-        arr[minIndex]=temp;
-
-        drawBars({},i+1);
-        await sleep(700);
-    }
-
-    drawBars({},arr.length);
-}
-
-drawBars();
-
-</script>
-
-</body>
-</html><!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Selection Sort Visualization</title>
-
-<style>
-
-body{
-    font-family: "Segoe UI", sans-serif;
-    text-align:center;
-    background:#f4f6fb;
-}
-
-h2{
-    margin-top:20px;
-}
-
-button{
-    padding:10px 20px;
-    border:none;
-    border-radius:8px;
-    background:#4a6cf7;
-    color:white;
-    font-size:16px;
-    cursor:pointer;
-}
-
-button:hover{
-    background:#3955d1;
-}
-
-#container{
-    display:flex;
-    justify-content:center;
-    align-items:flex-end;
-    height:350px;
-    margin-top:40px;
-}
-
-.bar{
-    width:40px;
-    margin:6px;
-    background:linear-gradient(180deg,#6ea8fe,#3d6df2);
-    border-radius:6px;
-    display:flex;
-    justify-content:center;
-    align-items:flex-start;
-    color:#333;
-    font-weight:bold;
-}
-
-.bar span{
-    position:relative;
-    top:-25px;
-}
-
-.active{
-    background:#ffb347 !important;
-}
-
-.min{
-    background:#ff6b6b !important;
-}
-
-.sorted{
-    background:#4cd964 !important;
-}
-
-</style>
-</head>
-
-<body>
-
-<h2>Selection Sort 動畫示範</h2>
-<button onclick="startSort()">開始排序</button>
-
-<div id="container"></div>
+<div class="info" id="info">狀態：等待開始</div>
 
 <script>
+let array = [];
+let isSorting = false;
 
-let arr = [42,18,33,12,27,55,20];
-let container = document.getElementById("container");
+function generateArray() {
+    if (isSorting) return;
 
-function drawBars(highlight={}, sortedIndex=-1){
+    const container = document.getElementById('container');
+    container.innerHTML = '';
+    array = [];
 
-    container.innerHTML="";
+    for (let i = 0; i < 20; i++) {
+        let value = Math.floor(Math.random() * 250) + 20;
+        array.push(value);
 
-    arr.forEach((value,index)=>{
-
-        let bar=document.createElement("div");
-        bar.classList.add("bar");
-        bar.style.height=value*4+"px";
-
-        if(index===highlight.current) bar.classList.add("active");
-        if(index===highlight.min) bar.classList.add("min");
-        if(index<sortedIndex) bar.classList.add("sorted");
-
-        let label=document.createElement("span");
-        label.innerText=value;
-
-        bar.appendChild(label);
+        let bar = document.createElement('div');
+        bar.classList.add('bar');
+        bar.style.height = value + 'px';
         container.appendChild(bar);
-
-    });
-}
-
-function sleep(ms){
-    return new Promise(r=>setTimeout(r,ms));
-}
-
-async function startSort(){
-
-    for(let i=0;i<arr.length-1;i++){
-
-        let minIndex=i;
-
-        for(let j=i+1;j<arr.length;j++){
-
-            drawBars({current:j,min:minIndex},i);
-            await sleep(600);
-
-            if(arr[j]<arr[minIndex]){
-                minIndex=j;
-                drawBars({current:j,min:minIndex},i);
-                await sleep(600);
-            }
-        }
-
-        let temp=arr[i];
-        arr[i]=arr[minIndex];
-        arr[minIndex]=temp;
-
-        drawBars({},i+1);
-        await sleep(700);
     }
 
-    drawBars({},arr.length);
+    document.getElementById('info').innerText = '狀態：已生成新陣列';
 }
 
-drawBars();
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
+async function selectionSort() {
+    if (isSorting) return;
+    isSorting = true;
+
+    let bars = document.getElementsByClassName('bar');
+    let speed = document.getElementById('speed');
+
+    for (let i = 0; i < array.length; i++) {
+        let minIndex = i;
+        bars[minIndex].classList.add('min');
+
+        for (let j = i + 1; j < array.length; j++) {
+            document.getElementById('info').innerText = `比較 index ${minIndex} 和 ${j}`;
+
+            bars[j].classList.add('active');
+            await sleep(speed.value);
+
+            if (array[j] < array[minIndex]) {
+                bars[minIndex].classList.remove('min');
+                minIndex = j;
+                bars[minIndex].classList.add('min');
+            }
+
+            bars[j].classList.remove('active');
+        }
+
+        if (minIndex !== i) {
+            document.getElementById('info').innerText = `交換 ${array[i]} 和 ${array[minIndex]}`;
+            await sleep(speed.value);
+
+            let temp = array[i];
+            array[i] = array[minIndex];
+            array[minIndex] = temp;
+
+            bars[i].style.height = array[i] + 'px';
+            bars[minIndex].style.height = array[minIndex] + 'px';
+        }
+
+        bars[minIndex].classList.remove('min');
+        bars[i].classList.add('finished');
+    }
+
+    document.getElementById('info').innerText = '排序完成！';
+    isSorting = false;
+}
+
+// 初始化
+generateArray();
 </script>
 
 </body>
