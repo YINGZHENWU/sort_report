@@ -2,7 +2,7 @@
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
-<title>Selection Sort 視覺化進階版</title>
+<title>Bubble Sort 視覺化進階版</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 <style>
 body {
@@ -13,6 +13,24 @@ body {
 }
 
 h1 { margin-top: 20px; }
+
+.home-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    padding: 10px 16px;
+    background: #ffffff;
+    color: #000;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transition: 0.3s;
+}
+
+.home-btn:hover {
+    transform: translateY(-2px);
+}
 
 .container {
     display: flex;
@@ -55,18 +73,22 @@ input[type=range] { width: 150px; }
 
 .finished { background: #00ff9d !important; }
 .active { background: #ff4d4d !important; }
-.min { background: #ffd166 !important; }
+.swap { background: #ffd166 !important; }
 </style>
 </head>
 <body>
 
-<h1>⚡ Selection Sort 視覺化進階版</h1>
+<a href="index.html" style="position:fixed;top:20px;left:20px;padding:10px 16px;background:#ffffff;color:#000;border-radius:10px;text-decoration:none;font-weight:bold;box-shadow:0 5px 15px rgba(0,0,0,0.3);transition:0.3s;">⬅ 回首頁</a>
+
+<a href="index.html" class="home-btn">⬅ 回首頁</a>
+
+<h1>🚀 Bubble Sort 視覺化進階版</h1>
 
 <div class="container" id="container"></div>
 
 <div class="controls">
     <button onclick="generateArray()">🔄 重新產生</button>
-    <button onclick="selectionSort()">▶️ 開始排序</button>
+    <button onclick="bubbleSort()">▶️ 開始排序</button>
     <br>
     速度：<input type="range" min="50" max="1000" value="300" id="speed">
 </div>
@@ -101,7 +123,7 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function selectionSort() {
+async function bubbleSort() {
     if (isSorting) return;
     isSorting = true;
 
@@ -109,38 +131,39 @@ async function selectionSort() {
     let speed = document.getElementById('speed');
 
     for (let i = 0; i < array.length; i++) {
-        let minIndex = i;
-        bars[minIndex].classList.add('min');
+        for (let j = 0; j < array.length - i - 1; j++) {
 
-        for (let j = i + 1; j < array.length; j++) {
-            document.getElementById('info').innerText = `比較 index ${minIndex} 和 ${j}`;
+            document.getElementById('info').innerText = `比較 index ${j} 和 ${j+1}`;
 
             bars[j].classList.add('active');
+            bars[j+1].classList.add('active');
+
             await sleep(speed.value);
 
-            if (array[j] < array[minIndex]) {
-                bars[minIndex].classList.remove('min');
-                minIndex = j;
-                bars[minIndex].classList.add('min');
+            if (array[j] > array[j+1]) {
+                document.getElementById('info').innerText = `交換 ${array[j]} 和 ${array[j+1]}`;
+
+                bars[j].classList.add('swap');
+                bars[j+1].classList.add('swap');
+
+                await sleep(speed.value);
+
+                let temp = array[j];
+                array[j] = array[j+1];
+                array[j+1] = temp;
+
+                bars[j].style.height = array[j] + 'px';
+                bars[j+1].style.height = array[j+1] + 'px';
+
+                bars[j].classList.remove('swap');
+                bars[j+1].classList.remove('swap');
             }
 
             bars[j].classList.remove('active');
+            bars[j+1].classList.remove('active');
         }
 
-        if (minIndex !== i) {
-            document.getElementById('info').innerText = `交換 ${array[i]} 和 ${array[minIndex]}`;
-            await sleep(speed.value);
-
-            let temp = array[i];
-            array[i] = array[minIndex];
-            array[minIndex] = temp;
-
-            bars[i].style.height = array[i] + 'px';
-            bars[minIndex].style.height = array[minIndex] + 'px';
-        }
-
-        bars[minIndex].classList.remove('min');
-        bars[i].classList.add('finished');
+        bars[array.length - i - 1].classList.add('finished');
     }
 
     document.getElementById('info').innerText = '排序完成！';
@@ -153,3 +176,4 @@ generateArray();
 
 </body>
 </html>
+
