@@ -2,115 +2,173 @@
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
-<title>氣泡排序演示</title>
-
+<title>Bubble Sort 視覺化進階版</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 <style>
-body{
-    font-family: Arial;
+body {
+    font-family: 'Poppins', sans-serif;
     text-align: center;
-    background:#f5f5f5;
+    background: linear-gradient(135deg,#141e30,#243b55);
+    color: white;
 }
 
-h2{
-    margin-top:20px;
+h1 {
+    margin-top: 20px;
 }
 
-#container{
-    display:flex;
-    justify-content:center;
-    align-items:flex-end;
-    height:300px;
-    margin:30px;
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 320px;
+    margin-top: 30px;
 }
 
-.bar{
-    width:30px;
-    margin:3px;
-    background:#4CAF50;
-    color:white;
-    font-size:12px;
+.bar {
+    width: 25px;
+    margin: 0 3px;
+    background: #00c6ff;
+    border-radius: 5px;
+    transition: all 0.3s ease;
 }
 
-button{
-    padding:10px 20px;
-    margin:10px;
-    font-size:16px;
-    cursor:pointer;
+.controls {
+    margin-top: 20px;
+}
+
+button, input {
+    padding: 10px 15px;
+    margin: 5px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+button {
+    background: #00c6ff;
+    color: black;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background: #00a2cc;
+}
+
+input[type=range] {
+    width: 150px;
+}
+
+.info {
+    margin-top: 15px;
+    font-size: 16px;
+}
+
+.finished {
+    background: #00ff9d !important;
+}
+
+.active {
+    background: #ff4d4d !important;
+}
+
+.swap {
+    background: #ffd166 !important;
 }
 </style>
 </head>
-
 <body>
 
-<h2>氣泡排序演示 (Bubble Sort Visualization)</h2>
+<h1>🚀 Bubble Sort 視覺化進階版</h1>
 
-<div id="container"></div>
+<div class="container" id="container"></div>
 
-<button onclick="generateArray()">生成隨機數列</button>
-<button onclick="bubbleSort()">開始排序</button>
+<div class="controls">
+    <button onclick="generateArray()">🔄 重新產生</button>
+    <button onclick="bubbleSort()">▶️ 開始排序</button>
+    <br>
+    速度：<input type="range" min="50" max="1000" value="300" id="speed">
+</div>
+
+<div class="info" id="info">狀態：等待開始</div>
 
 <script>
-
 let array = [];
+let isSorting = false;
 
-function generateArray(){
-    const container = document.getElementById("container");
-    container.innerHTML = "";
+function generateArray() {
+    if (isSorting) return;
+
+    const container = document.getElementById('container');
+    container.innerHTML = '';
     array = [];
 
-    for(let i=0;i<15;i++){
-        let value = Math.floor(Math.random()*100)+10;
+    for (let i = 0; i < 20; i++) {
+        let value = Math.floor(Math.random() * 250) + 20;
         array.push(value);
 
-        let bar = document.createElement("div");
-        bar.classList.add("bar");
-        bar.style.height = value*2 + "px";
-        bar.innerText = value;
-
+        let bar = document.createElement('div');
+        bar.classList.add('bar');
+        bar.style.height = value + 'px';
         container.appendChild(bar);
     }
+
+    document.getElementById('info').innerText = '狀態：已生成新陣列';
 }
 
-function sleep(ms){
-    return new Promise(resolve => setTimeout(resolve,ms));
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function bubbleSort(){
+async function bubbleSort() {
+    if (isSorting) return;
+    isSorting = true;
 
-    let bars = document.getElementsByClassName("bar");
+    let bars = document.getElementsByClassName('bar');
+    let speed = document.getElementById('speed');
 
-    for(let i=0;i<array.length;i++){
+    for (let i = 0; i < array.length; i++) {
+        for (let j = 0; j < array.length - i - 1; j++) {
 
-        for(let j=0;j<array.length-i-1;j++){
+            document.getElementById('info').innerText = `比較 index ${j} 和 ${j+1}`;
 
-            bars[j].style.background="red";
-            bars[j+1].style.background="red";
+            bars[j].classList.add('active');
+            bars[j+1].classList.add('active');
 
-            await sleep(300);
+            await sleep(speed.value);
 
-            if(array[j] > array[j+1]){
+            if (array[j] > array[j+1]) {
+                document.getElementById('info').innerText = `交換 ${array[j]} 和 ${array[j+1]}`;
+
+                bars[j].classList.add('swap');
+                bars[j+1].classList.add('swap');
+
+                await sleep(speed.value);
 
                 let temp = array[j];
                 array[j] = array[j+1];
                 array[j+1] = temp;
 
-                bars[j].style.height = array[j]*2 + "px";
-                bars[j+1].style.height = array[j+1]*2 + "px";
+                bars[j].style.height = array[j] + 'px';
+                bars[j+1].style.height = array[j+1] + 'px';
 
-                bars[j].innerText = array[j];
-                bars[j+1].innerText = array[j+1];
+                bars[j].classList.remove('swap');
+                bars[j+1].classList.remove('swap');
             }
 
-            bars[j].style.background="#4CAF50";
-            bars[j+1].style.background="#4CAF50";
+            bars[j].classList.remove('active');
+            bars[j+1].classList.remove('active');
         }
 
-        bars[array.length-i-1].style.background="orange";
+        bars[array.length - i - 1].classList.add('finished');
     }
+
+    document.getElementById('info').innerText = '排序完成！';
+    isSorting = false;
 }
 
+// 初始化
 generateArray();
-
 </script>
 
 </body>
