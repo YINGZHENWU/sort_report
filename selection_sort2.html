@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Selection Sort Visualization</title>
+
+<style>
+
+body{
+    font-family: "Segoe UI", sans-serif;
+    text-align:center;
+    background:#f4f6fb;
+}
+
+h2{
+    margin-top:20px;
+}
+
+button{
+    padding:10px 20px;
+    border:none;
+    border-radius:8px;
+    background:#4a6cf7;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#3955d1;
+}
+
+#container{
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
+    height:350px;
+    margin-top:40px;
+}
+
+.bar{
+    width:40px;
+    margin:6px;
+    background:linear-gradient(180deg,#6ea8fe,#3d6df2);
+    border-radius:6px;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    color:#333;
+    font-weight:bold;
+}
+
+.bar span{
+    position:relative;
+    top:-25px;
+}
+
+.active{
+    background:#ffb347 !important;
+}
+
+.min{
+    background:#ff6b6b !important;
+}
+
+.sorted{
+    background:#4cd964 !important;
+}
+
+</style>
+</head>
+
+<body>
+
+<h2>Selection Sort 動畫示範</h2>
+<button onclick="startSort()">開始排序</button>
+
+<div id="container"></div>
+
+<script>
+
+let arr = [42,18,33,12,27,55,20];
+let container = document.getElementById("container");
+
+function drawBars(highlight={}, sortedIndex=-1){
+
+    container.innerHTML="";
+
+    arr.forEach((value,index)=>{
+
+        let bar=document.createElement("div");
+        bar.classList.add("bar");
+        bar.style.height=value*4+"px";
+
+        if(index===highlight.current) bar.classList.add("active");
+        if(index===highlight.min) bar.classList.add("min");
+        if(index<sortedIndex) bar.classList.add("sorted");
+
+        let label=document.createElement("span");
+        label.innerText=value;
+
+        bar.appendChild(label);
+        container.appendChild(bar);
+
+    });
+}
+
+function sleep(ms){
+    return new Promise(r=>setTimeout(r,ms));
+}
+
+async function startSort(){
+
+    for(let i=0;i<arr.length-1;i++){
+
+        let minIndex=i;
+
+        for(let j=i+1;j<arr.length;j++){
+
+            drawBars({current:j,min:minIndex},i);
+            await sleep(600);
+
+            if(arr[j]<arr[minIndex]){
+                minIndex=j;
+                drawBars({current:j,min:minIndex},i);
+                await sleep(600);
+            }
+        }
+
+        let temp=arr[i];
+        arr[i]=arr[minIndex];
+        arr[minIndex]=temp;
+
+        drawBars({},i+1);
+        await sleep(700);
+    }
+
+    drawBars({},arr.length);
+}
+
+drawBars();
+
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Selection Sort Visualization</title>
+
+<style>
+
+body{
+    font-family: "Segoe UI", sans-serif;
+    text-align:center;
+    background:#f4f6fb;
+}
+
+h2{
+    margin-top:20px;
+}
+
+button{
+    padding:10px 20px;
+    border:none;
+    border-radius:8px;
+    background:#4a6cf7;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#3955d1;
+}
+
+#container{
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
+    height:350px;
+    margin-top:40px;
+}
+
+.bar{
+    width:40px;
+    margin:6px;
+    background:linear-gradient(180deg,#6ea8fe,#3d6df2);
+    border-radius:6px;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    color:#333;
+    font-weight:bold;
+}
+
+.bar span{
+    position:relative;
+    top:-25px;
+}
+
+.active{
+    background:#ffb347 !important;
+}
+
+.min{
+    background:#ff6b6b !important;
+}
+
+.sorted{
+    background:#4cd964 !important;
+}
+
+</style>
+</head>
+
+<body>
+
+<h2>Selection Sort 動畫示範</h2>
+<button onclick="startSort()">開始排序</button>
+
+<div id="container"></div>
+
+<script>
+
+let arr = [42,18,33,12,27,55,20];
+let container = document.getElementById("container");
+
+function drawBars(highlight={}, sortedIndex=-1){
+
+    container.innerHTML="";
+
+    arr.forEach((value,index)=>{
+
+        let bar=document.createElement("div");
+        bar.classList.add("bar");
+        bar.style.height=value*4+"px";
+
+        if(index===highlight.current) bar.classList.add("active");
+        if(index===highlight.min) bar.classList.add("min");
+        if(index<sortedIndex) bar.classList.add("sorted");
+
+        let label=document.createElement("span");
+        label.innerText=value;
+
+        bar.appendChild(label);
+        container.appendChild(bar);
+
+    });
+}
+
+function sleep(ms){
+    return new Promise(r=>setTimeout(r,ms));
+}
+
+async function startSort(){
+
+    for(let i=0;i<arr.length-1;i++){
+
+        let minIndex=i;
+
+        for(let j=i+1;j<arr.length;j++){
+
+            drawBars({current:j,min:minIndex},i);
+            await sleep(600);
+
+            if(arr[j]<arr[minIndex]){
+                minIndex=j;
+                drawBars({current:j,min:minIndex},i);
+                await sleep(600);
+            }
+        }
+
+        let temp=arr[i];
+        arr[i]=arr[minIndex];
+        arr[minIndex]=temp;
+
+        drawBars({},i+1);
+        await sleep(700);
+    }
+
+    drawBars({},arr.length);
+}
+
+drawBars();
+
+</script>
+
+</body>
+</html>
