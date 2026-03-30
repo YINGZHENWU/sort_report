@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>插入排序法動畫示範</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Microsoft JhengHei', sans-serif;
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    padding: 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    text-align: center;
+}
+
+/* 回首頁 */
+.home-btn {
+    display:inline-block;
+    margin-bottom:20px;
+    padding:10px 20px;
+    background:#667eea;
+    color:white;
+    text-decoration:none;
+    border-radius:6px;
+}
+
+.home-btn:hover {
+    background:#5563c1;
+}
+
+/* 方塊 */
+.array {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+.box {
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    background: #667eea;
+    color: white;
+    line-height: 50px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* 按鈕 */
+button {
+    padding: 10px 20px;
+    background: #764ba2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #5a3a87;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<a href="index.html" class="home-btn">← 回首頁</a>
+
+<h1>🔸 插入排序法動畫</h1>
+<p>按下按鈕觀看排序過程</p>
+
+<div class="array" id="array"></div>
+
+<button onclick="startSort()">開始排序</button>
+
+</div>
+
+<script>
+let arr = [5, 2, 8, 1, 9];
+let container = document.getElementById("array");
+
+// 顯示陣列
+function render() {
+    container.innerHTML = "";
+    arr.forEach(num => {
+        let div = document.createElement("div");
+        div.className = "box";
+        div.innerText = num;
+        container.appendChild(div);
+    });
+}
+
+// 延遲函數
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+// 插入排序動畫
+async function startSort() {
+    for (let i = 1; i < arr.length; i++) {
+        let key = arr[i];
+        let j = i - 1;
+
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j--;
+            render();
+            await sleep(500);
+        }
+
+        arr[j + 1] = key;
+        render();
+        await sleep(500);
+    }
+}
+
+// 初始畫面
+render();
+</script>
+
+</body>
+</html>
