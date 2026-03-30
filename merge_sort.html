@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>合併排序法介紹</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Microsoft JhengHei', 微軟正黑體, sans-serif;
+    line-height: 1.6;
+    background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+    color: #333;
+    padding: 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    padding: 40px;
+}
+
+/* 回首頁按鈕 */
+.home-btn {
+    display:inline-block;
+    margin-bottom:20px;
+    padding:10px 20px;
+    background:#667eea;
+    color:white;
+    text-decoration:none;
+    border-radius:6px;
+    font-size:14px;
+}
+
+.home-btn:hover {
+    background:#5563c1;
+}
+
+h1 {
+    color: #667eea;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 2.5em;
+}
+
+.subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+h2 {
+    color: #764ba2;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    border-bottom: 3px solid #667eea;
+    padding-bottom: 10px;
+}
+
+p {
+    margin-bottom: 15px;
+    text-align: justify;
+}
+
+.code-block {
+    background-color: #f5f5f5;
+    padding: 15px;
+    border-radius: 5px;
+    font-family: monospace;
+    overflow-x: auto;
+}
+
+.pros-cons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.pros {
+    background: #d4edda;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.cons {
+    background: #f8d7da;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+th {
+    background: #667eea;
+    color: white;
+}
+
+.example {
+    background: #eef7ff;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 40px;
+    color: #666;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<a href="index.html" class="home-btn">← 回首頁</a>
+
+<h1>🔷 合併排序法</h1>
+<p class="subtitle">Merge Sort - 分治法的經典排序演算法</p>
+
+<h2>📌 什麼是合併排序法？</h2>
+<p>
+合併排序法（Merge Sort）是一種基於「分治法（Divide and Conquer）」的排序演算法。
+它會先將數列不斷分割成小部分，再將排序後的小部分逐步合併，最終得到完整排序結果。
+</p>
+
+<h2>🎯 演算法原理</h2>
+<ol>
+<li>將數列不斷對半分割</li>
+<li>直到每個子陣列只剩一個元素</li>
+<li>將子陣列兩兩合併並排序</li>
+<li>重複合併直到整個數列完成排序</li>
+</ol>
+
+<h2>💻 代碼示例（C）</h2>
+<div class="code-block">
+#include &lt;stdio.h&gt;
+
+void merge(int arr[], int l, int m, int r) {
+    int i = l, j = m + 1, k = 0;
+    int temp[100];
+
+    while(i <= m && j <= r) {
+        if(arr[i] <= arr[j])
+            temp[k++] = arr[i++];
+        else
+            temp[k++] = arr[j++];
+    }
+
+    while(i <= m) temp[k++] = arr[i++];
+    while(j <= r) temp[k++] = arr[j++];
+
+    for(i = l, k = 0; i <= r; i++, k++)
+        arr[i] = temp[k];
+}
+
+void mergeSort(int arr[], int l, int r) {
+    if(l < r) {
+        int m = (l + r) / 2;
+        mergeSort(arr, l, m);
+        mergeSort(arr, m + 1, r);
+        merge(arr, l, m, r);
+    }
+}
+
+int main() {
+    int arr[] = {38, 27, 43, 3, 9, 82, 10};
+    int n = 7;
+
+    mergeSort(arr, 0, n - 1);
+
+    printf("排序後: ");
+    for(int i = 0; i < n; i++)
+        printf("%d ", arr[i]);
+
+    return 0;
+}
+</div>
+
+<h2>📊 複雜度分析</h2>
+<table>
+<tr><th>項目</th><th>複雜度</th><th>說明</th></tr>
+<tr><td>時間複雜度（最佳）</td><td>O(n log n)</td><td>每次都需要分割與合併</td></tr>
+<tr><td>時間複雜度（平均）</td><td>O(n log n)</td><td>穩定表現</td></tr>
+<tr><td>時間複雜度（最差）</td><td>O(n log n)</td><td>不受資料影響</td></tr>
+<tr><td>空間複雜度</td><td>O(n)</td><td>需要額外陣列</td></tr>
+<tr><td>穩定性</td><td>穩定</td><td>相同元素順序不變</td></tr>
+</table>
+
+<h2>✅ 優點與缺點</h2>
+<div class="pros-cons">
+<div class="pros">
+<h3>✓ 優點</h3>
+<ul>
+<li>時間複雜度穩定 O(n log n)</li>
+<li>適合大數據排序</li>
+<li>穩定排序</li>
+<li>適合鏈結串列</li>
+</ul>
+</div>
+
+<div class="cons">
+<h3>✗ 缺點</h3>
+<ul>
+<li>需要額外記憶體</li>
+<li>實作較複雜</li>
+<li>遞迴可能影響效能</li>
+</ul>
+</div>
+</div>
+
+<h2>🔍 執行範例</h2>
+<div class="example">
+<p>原始陣列：[38, 27, 43, 3]</p>
+<p>分割 → [38,27] [43,3]</p>
+<p>再分 → [38][27] [43][3]</p>
+<p>合併 → [27,38] [3,43]</p>
+<p>最終 → [3,27,38,43]</p>
+</div>
+
+<div class="footer">
+<p>© 2026 合併排序法教學</p>
+</div>
+
+</div>
+
+</body>
+</html>
