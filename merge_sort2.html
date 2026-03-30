@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>Merge Sort 視覺化進階版</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    background: linear-gradient(135deg,#141e30,#243b55);
+    color: white;
+}
+
+h1 { margin-top: 20px; }
+
+.home-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    padding: 10px 16px;
+    background: #ffffff;
+    color: #000;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.home-btn:hover {
+    transform: translateY(-2px);
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 320px;
+    margin-top: 30px;
+}
+
+.bar {
+    width: 25px;
+    margin: 0 3px;
+    background: #00c6ff;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.controls { margin-top: 20px; }
+
+button, input {
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 8px;
+    border: none;
+}
+
+button {
+    background: #00c6ff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover { background: #00a2cc; }
+
+input[type=range] { width: 150px; }
+
+.info { margin-top: 15px; }
+
+.active { background: #ff4d4d !important; }
+.merge { background: #ffd166 !important; }
+.finished { background: #00ff9d !important; }
+</style>
+</head>
+
+<body>
+
+<a href="index.html" class="home-btn">⬅ 回首頁</a>
+
+<h1>🚀 Merge Sort 視覺化進階版</h1>
+
+<div class="container" id="container"></div>
+
+<div class="controls">
+    <button onclick="generateArray()">🔄 重新產生</button>
+    <button onclick="startMergeSort()">▶️ 開始排序</button>
+    <br>
+    速度：<input type="range" min="50" max="1000" value="300" id="speed">
+</div>
+
+<div class="info" id="info">狀態：等待開始</div>
+
+<script>
+let array = [];
+let isSorting = false;
+
+function generateArray() {
+    if (isSorting) return;
+
+    const container = document.getElementById('container');
+    container.innerHTML = '';
+    array = [];
+
+    for (let i = 0; i < 20; i++) {
+        let value = Math.floor(Math.random() * 250) + 20;
+        array.push(value);
+
+        let bar = document.createElement('div');
+        bar.classList.add('bar');
+        bar.style.height = value + 'px';
+        container.appendChild(bar);
+    }
+
+    document.getElementById('info').innerText = '狀態：已生成新陣列';
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function merge(l, m, r) {
+    let bars = document.getElementsByClassName('bar');
+    let speed = document.getElementById('speed');
+
+    let left = array.slice(l, m + 1);
+    let right = array.slice(m + 1, r + 1);
+
+    let i = 0, j = 0, k = l;
+
+    while (i < left.length && j < right.length) {
+
+        bars[k].classList.add('active');
+        document.getElementById('info').innerText = `比較 ${left[i]} 和 ${right[j]}`;
+
+        await sleep(speed.value);
+
+        if (left[i] <= right[j]) {
+            array[k] = left[i];
+            bars[k].style.height = left[i] + 'px';
+            i++;
+        } else {
+            array[k] = right[j];
+            bars[k].style.height = right[j] + 'px';
+            j++;
+        }
+
+        bars[k].classList.remove('active');
+        k++;
+    }
+
+    while (i < left.length) {
+        bars[k].classList.add('merge');
+        array[k] = left[i];
+        bars[k].style.height = left[i] + 'px';
+        i++; k++;
+
+        await sleep(speed.value);
+    }
+
+    while (j < right.length) {
+        bars[k].classList.add('merge');
+        array[k] = right[j];
+        bars[k].style.height = right[j] + 'px';
+        j++; k++;
+
+        await sleep(speed.value);
+    }
+}
+
+async function mergeSort(l, r) {
+    if (l >= r) return;
+
+    let m = Math.floor((l + r) / 2);
+
+    await mergeSort(l, m);
+    await mergeSort(m + 1, r);
+    await merge(l, m, r);
+}
+
+async function startMergeSort() {
+    if (isSorting) return;
+    isSorting = true;
+
+    await mergeSort(0, array.length - 1);
+
+    let bars = document.getElementsByClassName('bar');
+    for (let i = 0; i < bars.length; i++) {
+        bars[i].classList.add('finished');
+    }
+
+    document.getElementById('info').innerText = '排序完成！';
+    isSorting = false;
+}
+
+// 初始化
+generateArray();
+</script>
+
+</body>
+</html>
