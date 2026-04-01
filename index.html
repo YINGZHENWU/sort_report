@@ -1,72 +1,83 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <title>排序演算法首頁</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<title>排序演算法首頁</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #74ebd5, #ACB6E5);
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        .container {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            text-align: center;
-            width: 400px;
-        }
+body {
+    font-family: 'Poppins', sans-serif;
+    /* 柔和淺色背景 */
+    background: linear-gradient(135deg, #fdfbfb, #ebedee);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-        h1 {
-            margin-bottom: 10px;
-            color: #333;
-        }
+/* 卡片 */
+.container {
+    background: #ffffff;
+    padding: 45px;
+    border-radius: 25px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+    text-align: center;
+    width: 420px;
+}
 
-        p {
-            color: #666;
-            margin-bottom: 20px;
-        }
+/* 標題 */
+h1 {
+    margin-bottom: 10px;
+    color: #444;
+    letter-spacing: 1px;
+}
 
-        .section {
-            margin-top: 20px;
-        }
+/* 文字 */
+p {
+    color: #888;
+    margin-bottom: 20px;
+}
 
-        .btn {
-            display: block;
-            padding: 12px;
-            margin: 10px 0;
-            background: linear-gradient(45deg, #4CAF50, #2ecc71);
-            color: white;
-            border-radius: 10px;
-            text-decoration: none;
-            font-size: 18px;
-            transition: 0.3s;
-        }
+/* 區塊 */
+.section {
+    margin-top: 20px;
+}
 
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
+/* 按鈕 */
+.btn {
+    display: block;
+    padding: 12px;
+    margin: 12px 0;
+    background: linear-gradient(45deg, #d4fc79, #96e6a1);
+    color: #444;
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 17px;
+    transition: 0.3s;
+}
 
-        .divider {
-            margin: 25px 0;
-            height: 1px;
-            background: #ddd;
-        }
-    </style>
+/* hover效果 */
+.btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+/* 分隔線 */
+.divider {
+    margin: 25px 0;
+    height: 1px;
+    background: #eee;
+}
+</style>
 </head>
+
 <body>
 
 <div class="container">
@@ -78,7 +89,7 @@
         <a href="bubble_sort.html" class="btn">Bubble Sort</a>
         <a href="selection_sort.html" class="btn">Selection Sort</a>
         <a href="insertion_sort.html" class="btn">Insertion Sort</a>
-        <a href="merge_sort.html" class="btn"> Merge Sort</a>
+        <a href="merge_sort.html" class="btn">Merge Sort</a>
     </div>
 
     <div class="divider"></div>
@@ -89,7 +100,6 @@
         <a href="selection_sort2.html" class="btn">Selection Sort Demo</a>
         <a href="insertion_sort2.html" class="btn">Insertion Sort Demo</a>
         <a href="merge_sort2.html" class="btn">Merge Sort Demo</a>
-        
     </div>
 </div>
 
