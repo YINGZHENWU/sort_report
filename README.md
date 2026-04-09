@@ -2,7 +2,7 @@
 
 學號:11428112
 姓名:吳盈臻
-模擬頁面:[[模擬頁面](https://yingzhenwu.github.io/sort_report/)]。
+[模擬頁面](https://yingzhenwu.github.io/sort_report/)。
 
 
 ## 一、前言
@@ -16,42 +16,67 @@
 ### 1. 氣泡排序（Bubble Sort）
 氣泡排序是一種簡單的排序方法，其原理是不斷比較相鄰兩個元素，如果順序錯誤就交換位置，使較大的數逐漸移動到陣列尾端。
 
-**操作方式**
-1. 從陣列開頭開始比較相鄰元素  
-2. 若前者大於後者則交換  
-3. 每一輪會將最大值移到最後  
-4. 重複直到排序完成  
+[氣泡排序介紹](https://yingzhenwu.github.io/sort_report/bubble_sort.html)、
+[氣泡排序示範](https://yingzhenwu.github.io/sort_report/bubble_sort2.html)。
 
+**操作方式**
+1. 比較第一個和第二個元素，若前者大於後者則交換。
+2. 移到下一對相鄰元素，重複比較與交換。
+3. 每完成一輪，最後的元素為最大值，下一輪可忽略。
+4. 直到沒有交換發生，排序完成。
 ---
 
 ### 2. 選擇排序（Selection Sort）
 選擇排序的概念是每次從未排序資料中找出最小值，並與目前位置的元素交換。
 
+[選擇排序介紹](https://yingzhenwu.github.io/sort_report/selection_sort.html)、
+[選擇排序示範](https://yingzhenwu.github.io/sort_report/selection_sort2.html)。
+
 **操作方式**
-1. 從未排序區找出最小值  
-2. 與當前位置元素交換  
-3. 排序區逐漸增加  
-4. 重複直到排序完成  
+1. 在陣列中找到最小元素。
+2. 將最小元素與陣列第一個未排序元素交換。
+3. 對剩下未排序部分重複步驟 1-2。
+4. 直到所有元素排序完成。
 
 ---
 
 ### 3. 插入排序（Insertion Sort）
 插入排序的概念類似整理撲克牌，每次將一個元素插入到已排序序列中的適當位置。
 
+[插入排序介紹](https://yingzhenwu.github.io/sort_report/insertion_sort.html)、
+[插入排序示範](https://yingzhenwu.github.io/sort_report/insertion_sort2.html)。
+
 **操作方式**
-1. 取出下一個元素  
-2. 與已排序元素比較  
-3. 找到正確位置插入  
+1. 從第二個元素開始，將元素暫存。
+2. 比較已排序部分元素，找到插入位置。
+3. 將暫存元素插入正確位置。
+4. 重複直到整個陣列有序。
 
 ---
 
 ### 4. 合併排序（Merge Sort）
 合併排序使用分治法，將陣列不斷分割成較小的子陣列，排序後再將它們合併。
 
+[合併排序介紹](https://yingzhenwu.github.io/sort_report/merge_sort.html)、
+[合併排序示範](https://yingzhenwu.github.io/sort_report/merge_sort2.html)。
+
+**操作方式**
+1. 將陣列分成左右兩半。
+2. 對左右子陣列分別遞迴合併排序。
+3. 將兩個已排序子陣列合併成一個完整的有序陣列。
 ---
 
 ### 5. 快速排序（Quick Sort）
 快速排序透過選擇一個基準值（pivot），將小於基準值的元素放在左側，大於基準值的元素放在右側，再分別進行排序。
+
+[快速排序介紹](https://yingzhenwu.github.io/sort_report/)、
+[快速排序示範](https://yingzhenwu.github.io/sort_report/)。
+
+**操作方式**
+1. 選定 pivot 元素。
+2. 將陣列元素分成小於 pivot 與大於 pivot 兩部分。
+3. 對兩部分遞迴快速排序。
+4. 合併結果得到完整排序陣列。
 
 ---
 
