@@ -151,3 +151,12 @@
 相比之下，合併排序與快速排序利用分治法的概念，使時間複雜度降低到 O(n log n)，在大量資料排序時表現較佳。在本次實驗中也可以明顯看到，當資料量增加時，這兩種排序方法仍能保持較快的速度。
 
 透過這次報告，我不僅學習到排序演算法的基本原理，也了解到演算法效率對程式效能的重要性。未來在設計程式時，選擇合適的演算法可以讓程式運行更有效率，這也是學習演算法的重要原因。
+
+---
+
+## 八、參考資料
+
+1.https://medium.com/@huiyutonia/sort-%E5%8F%8A%E6%8E%92%E5%BA%8F%E6%BC%94%E7%AE%97%E6%B3%95-sorting-algorithm%E7%AD%86%E8%A8%98-1e72e4b00fa8
+2.https://sites.google.com/view/zsgititit/home/%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-%E4%BD%BF%E7%94%A8python/%E6%8E%92%E5%BA%8F
+3.https://medium.com/appworks-school/%E5%88%9D%E5%AD%B8%E8%80%85%E5%AD%B8%E6%BC%94%E7%AE%97%E6%B3%95-%E6%8E%92%E5%BA%8F%E6%B3%95%E9%80%B2%E9%9A%8E-%E5%90%88%E4%BD%B5%E6%8E%92%E5%BA%8F%E6%B3%95-6252651c6f7e
+4.https://hackmd.io/@coherent17/Sy79MIyju
