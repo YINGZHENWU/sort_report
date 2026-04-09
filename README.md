@@ -15,7 +15,7 @@
 
 ### 1. 氣泡排序（Bubble Sort）
 氣泡排序是一種簡單的排序方法，其原理是不斷比較相鄰兩個元素，如果順序錯誤就交換位置，使較大的數逐漸移動到陣列尾端。
-特點：實作簡單，但效率較差。
+<br>特點：實作簡單，但效率較差。
 
 [氣泡排序介紹](https://yingzhenwu.github.io/sort_report/bubble_sort.html)、
 [氣泡排序示範](https://yingzhenwu.github.io/sort_report/bubble_sort2.html)。
@@ -29,7 +29,7 @@
 
 ### 2. 選擇排序（Selection Sort）
 選擇排序的概念是每次從未排序資料中找出最小值，並與目前位置的元素交換。
-特點：交換次數少，但比較次數多。
+<br>特點：交換次數少，但比較次數多。
 
 [選擇排序介紹](https://yingzhenwu.github.io/sort_report/selection_sort.html)、
 [選擇排序示範](https://yingzhenwu.github.io/sort_report/selection_sort2.html)。
@@ -44,7 +44,7 @@
 
 ### 3. 插入排序（Insertion Sort）
 插入排序的概念類似整理撲克牌，每次將一個元素插入到已排序序列中的適當位置。
-特點：在資料量小或接近排序完成時效率較佳。
+<br>特點：在資料量小或接近排序完成時效率較佳。
 
 [插入排序介紹](https://yingzhenwu.github.io/sort_report/insertion_sort.html)、
 [插入排序示範](https://yingzhenwu.github.io/sort_report/insertion_sort2.html)。
@@ -59,7 +59,7 @@
 
 ### 4. 合併排序（Merge Sort）
 合併排序使用分治法，將陣列不斷分割成較小的子陣列，排序後再將它們合併。
-特點：時間複雜度穩定，但需要額外空間。
+<br>特點：時間複雜度穩定，但需要額外空間。
 
 [合併排序介紹](https://yingzhenwu.github.io/sort_report/merge_sort.html)、
 [合併排序示範](https://yingzhenwu.github.io/sort_report/merge_sort2.html)。
@@ -72,7 +72,7 @@
 
 ### 5. 快速排序（Quick Sort）
 快速排序透過選擇一個基準值（pivot），將小於基準值的元素放在左側，大於基準值的元素放在右側，再分別進行排序。
-特點：平均情況下速度最快，但最差情況會變慢。
+<br>點：平均情況下速度最快，但最差情況會變慢。
 
 [快速排序介紹](https://yingzhenwu.github.io/sort_report/)、
 [快速排序示範](https://yingzhenwu.github.io/sort_report/)。
