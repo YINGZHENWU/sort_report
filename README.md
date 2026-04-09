@@ -15,6 +15,7 @@
 
 ### 1. 氣泡排序（Bubble Sort）
 氣泡排序是一種簡單的排序方法，其原理是不斷比較相鄰兩個元素，如果順序錯誤就交換位置，使較大的數逐漸移動到陣列尾端。
+特點：實作簡單，但效率較差。
 
 [氣泡排序介紹](https://yingzhenwu.github.io/sort_report/bubble_sort.html)、
 [氣泡排序示範](https://yingzhenwu.github.io/sort_report/bubble_sort2.html)。
@@ -28,6 +29,7 @@
 
 ### 2. 選擇排序（Selection Sort）
 選擇排序的概念是每次從未排序資料中找出最小值，並與目前位置的元素交換。
+特點：交換次數少，但比較次數多。
 
 [選擇排序介紹](https://yingzhenwu.github.io/sort_report/selection_sort.html)、
 [選擇排序示範](https://yingzhenwu.github.io/sort_report/selection_sort2.html)。
@@ -42,6 +44,7 @@
 
 ### 3. 插入排序（Insertion Sort）
 插入排序的概念類似整理撲克牌，每次將一個元素插入到已排序序列中的適當位置。
+特點：在資料量小或接近排序完成時效率較佳。
 
 [插入排序介紹](https://yingzhenwu.github.io/sort_report/insertion_sort.html)、
 [插入排序示範](https://yingzhenwu.github.io/sort_report/insertion_sort2.html)。
@@ -56,6 +59,7 @@
 
 ### 4. 合併排序（Merge Sort）
 合併排序使用分治法，將陣列不斷分割成較小的子陣列，排序後再將它們合併。
+特點：時間複雜度穩定，但需要額外空間。
 
 [合併排序介紹](https://yingzhenwu.github.io/sort_report/merge_sort.html)、
 [合併排序示範](https://yingzhenwu.github.io/sort_report/merge_sort2.html)。
@@ -68,9 +72,10 @@
 
 ### 5. 快速排序（Quick Sort）
 快速排序透過選擇一個基準值（pivot），將小於基準值的元素放在左側，大於基準值的元素放在右側，再分別進行排序。
+特點：平均情況下速度最快，但最差情況會變慢。
 
-[快速排序介紹](https://yingzhenwu.github.io/sort_report/quick_sort.html)、
-[快速排序示範](https://yingzhenwu.github.io/sort_report/quick_sort2.html)。
+[快速排序介紹](https://yingzhenwu.github.io/sort_report/)、
+[快速排序示範](https://yingzhenwu.github.io/sort_report/)。
 
 **操作方式**
 1. 選定 pivot 元素。
@@ -82,13 +87,13 @@
 
 ## 三、複雜度分析
 
-| 排序法 | 平均時間複雜度 | 最差時間複雜度 | 空間複雜度 |
-|------|------|------|------|
-| Bubble Sort | O(n²) | O(n²) | O(1) |
-| Selection Sort | O(n²) | O(n²) | O(1) |
-| Insertion Sort | O(n²) | O(n²) | O(1) |
-| Merge Sort | O(n log n) | O(n log n) | O(n) |
-| Quick Sort | O(n log n) | O(n²) | O(log n) |
+| 演算法 | 最佳時間 | 平均時間 | 最差時間 | 空間複雜度 |
+|--------|--------|--------|--------|-----------|
+| Bubble Sort | O(n) | O(n²) | O(n²) | O(1) |
+| Selection Sort | O(n²) | O(n²) | O(n²) | O(1) |
+| Insertion Sort | O(n) | O(n²) | O(n²) | O(1) |
+| Merge Sort | O(n log n) | O(n log n) | O(n log n) | O(n) |
+| Quick Sort | O(n log n) | O(n log n) | O(n²) | O(log n) |
 
 其中前三種排序法時間複雜度較高，因此在大量資料時效率較差，而後兩種排序法效率較高。
 
@@ -101,6 +106,9 @@
 **實驗設定**
 - 使用亂數產生整數資料
 - 測試不同資料量
+
+**測試方法**
+使用 C 語言實作五種排序演算法，並利用 `clock()` 函式計算執行時間。
 
 | 測試次數 | 資料量 n |
 |------|------|
@@ -126,14 +134,50 @@
 |10000|9.8s|9.2s|8.7s|0.10s|0.08s|
 |50000|非常慢|非常慢|非常慢|0.70s|0.60s|
 
-**結果分析**
+## 六、結果分析
 
-1. O(n²) 排序法在資料量變大時效率下降明顯  
-2. Merge Sort 與 Quick Sort 在大量資料時效率較高  
-3. Quick Sort 在多數情況下具有良好的平均效能  
+從實驗結果可以觀察到：
+
+1. Bubble、Selection、Insertion 屬於 O(n²)，當資料量增加時，執行時間明顯上升。  
+2. Merge Sort 與 Quick Sort 為 O(n log n)，在大數據時仍保持良好效率。  
+3. Quick Sort 在平均情況下表現最佳，但仍可能受到資料排列影響。
 
 ---
 
-## 六、心得與結論
+## 七、心得與結論
 
-透過這次做排序演算法的分析跟實驗，我對不同演算法的效率差異有更清楚的認識。像氣泡排序、選擇排序和插入排序雖然概念簡單，但資料量一多，速度就會慢下來，所以比較適合小型資料或教學用。相對地，合併排序和快速排序利用分治法，把時間複雜度降到 O(n log n)，在大量資料排序時就表現比較好。這次實驗也很明顯看到，當資料量變大，這兩種方法速度還能維持得很快。我不只學會了排序演算法的基本原理，也了解到演算法效率對程式運行的重要性。以後寫程式時，選對演算法就能讓程式跑得更順，也更省力。而且在做的過程越來越上手，自己實作出頁面動畫、看到排序的過程真的蠻有成就感的。
+透過這次排序演算法的分析與實驗，我更了解不同演算法在效率上的差異。像氣泡排序、選擇排序和插入排序雖然概念簡單，但在資料量變大時排序速度會明顯下降，因此較適合用在小型資料或教學用途。
+
+相比之下，合併排序與快速排序利用分治法的概念，使時間複雜度降低到 O(n log n)，在大量資料排序時表現較佳。在本次實驗中也可以明顯看到，當資料量增加時，這兩種排序方法仍能保持較快的速度。
+
+透過這次報告，我不僅學習到排序演算法的基本原理，也了解到演算法效率對程式效能的重要性。未來在設計程式時，選擇合適的演算法可以讓程式運行更有效率，這也是學習演算法的重要原因。
+
+---
+
+## 八、附錄（程式片段）
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main() {
+    int n = 1000;
+    int arr[n];
+
+    for(int i = 0; i < n; i++) {
+        arr[i] = rand() % 10000;
+    }
+
+    clock_t start, end;
+    start = clock();
+
+    // 呼叫排序函式
+    // bubbleSort(arr, n);
+
+    end = clock();
+
+    printf("Time: %f\n", (double)(end - start) / CLOCKS_PER_SEC);
+
+    return 0;
+}
