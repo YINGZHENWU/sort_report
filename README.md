@@ -151,33 +151,3 @@
 相比之下，合併排序與快速排序利用分治法的概念，使時間複雜度降低到 O(n log n)，在大量資料排序時表現較佳。在本次實驗中也可以明顯看到，當資料量增加時，這兩種排序方法仍能保持較快的速度。
 
 透過這次報告，我不僅學習到排序演算法的基本原理，也了解到演算法效率對程式效能的重要性。未來在設計程式時，選擇合適的演算法可以讓程式運行更有效率，這也是學習演算法的重要原因。
-
----
-
-## 八、附錄（程式片段）
-
-```c
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-
-int main() {
-    int n = 1000;
-    int arr[n];
-
-    for(int i = 0; i < n; i++) {
-        arr[i] = rand() % 10000;
-    }
-
-    clock_t start, end;
-    start = clock();
-
-    // 呼叫排序函式
-    // bubbleSort(arr, n);
-
-    end = clock();
-
-    printf("Time: %f\n", (double)(end - start) / CLOCKS_PER_SEC);
-
-    return 0;
-}
